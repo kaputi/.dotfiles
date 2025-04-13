@@ -55,7 +55,7 @@ export PATH=$PATH:$HOME/.local/bin
 export ZPLUG_HOME=$HOME/.config/zplug
 
 # export EDITOR="nv"
-export EDITOR="towervim"
+export EDITOR="tv2"
 
 # zk dir
 export ZK_NOTEBOOK_DIR=$HOME/Documents/zk
@@ -63,3 +63,10 @@ export ZK_NOTEBOOK_DIR=$HOME/Documents/zk
 # go
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
+
+# mongo compass needs this to store passwords
+export XDG_CURRENT_DESKTOP=GNOME
+
+# flutter
+export CHROME_EXECUTABLE=google-chrome-stable
+export PATH=$PATH:$HOME/development/flutter/bin

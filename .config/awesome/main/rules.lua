@@ -75,20 +75,73 @@ function _M.get(clientkeys, clientbuttons)
           'Microsoft Teams - Insiders',
           'Microsoft Teams - Preview',
           'microsoft teams - preview',
+          'teams',
           'slack',
           'Slack',
           'teams-for-linux',
           'crx_cifhbcnohmdccbgoicgdjpfamggdegmo',
+          'Skype',
+          'skype',
         },
         name = {
           'Microsoft Teams - Chat',
           'Microsoft Teams',
           'WhatsApp Web',
+          'Skype*',
         },
       },
       properties = {
         screen = 2,
         tag = '9',
+        switchtotag = false,
+        floating = false,
+      },
+    },
+    {
+      rule_any = {
+        class = {
+          'telegram-desktop',
+          'TelegramDesktop',
+        },
+        name = {
+          'WhatsApp Web',
+          'Telegram',
+        },
+      },
+      properties = {
+        screen = 2,
+        tag = '8',
+        switchtotag = false,
+        floating = false,
+      },
+    },
+    {
+      rule_any = {
+        class = {
+          'spotify',
+          'Spotify',
+        },
+      },
+      properties = {
+        screen = 2,
+        tag = '7',
+        switchtotag = false,
+        floating = false,
+      },
+    },
+    {
+      rule_any = { name = { 'DevTools - *' } },
+      properties = { floating = false },
+    },
+    {
+      rule_any = {
+        -- name = { '* Mozilla Thunderbird' },
+        -- class = { 'Thunderbird' },
+        class = { 'Thunderbird', 'thunderbird', 'mail', 'Mail' },
+      },
+      properties = {
+        tag = '5',
+        screen = 1,
         switchtotag = false,
         floating = false,
       },

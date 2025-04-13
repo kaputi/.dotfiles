@@ -1,69 +1,109 @@
-###################################zplug############################################
-
-source $ZPLUG_HOME/init.zsh
-
-zplug mafredri/zsh-async, from:github
-
-# Theme
-zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
-zstyle :prompt:pure:git:stash show yes
-zstyle :prompt:pure:path color red
-zstyle :prompt:pure:git:branch color yellow
-zstyle :prompt:pure:prompt:success color green
-zstyle :prompt:pure:git:arrow blue
-
-# zplug "subnixr/minimal", as:theme
-# # MNML_NOMRAL_CHAR='-'
-# MNML_OK_COLOR=3
-
-# Autojump using z directory
-zplug "agkozak/zsh-z"
-
-# syntax
-zplug "zsh-users/zsh-syntax-highlighting", defer:2
-
-# autosugestion
-zplug "zsh-users/zsh-autosuggestions"
-
-# vim mode
-zplug "softmoth/zsh-vim-mode"
-
-# Install plugins if there are plugins that have not been installed
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-zplug load
+###################################zplug############################################
+
+# source $ZPLUG_HOME/init.zsh
+
+# zplug mafredri/zsh-async, from:github
+
+# # Theme
+# zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
+# zstyle :prompt:pure:git:stash show yes
+# zstyle :prompt:pure:path color red
+# zstyle :prompt:pure:git:branch color yellow
+# zstyle :prompt:pure:prompt:success color green
+# zstyle :prompt:pure:git:arrow blue
+
+# # zplug "subnixr/minimal", as:theme
+# # # MNML_NOMRAL_CHAR='-'
+# # MNML_OK_COLOR=3
+
+# # Autojump using z directory
+# zplug "agkozak/zsh-z"
+
+# # syntax
+# zplug "zsh-users/zsh-syntax-highlighting", defer:2
+
+# # autosugestion
+# zplug "zsh-users/zsh-autosuggestions"
+
+# # vim mode
+# zplug "softmoth/zsh-vim-mode"
+
+# # Install plugins if there are plugins that have not been installed
+# if ! zplug check --verbose; then
+#     printf "Install? [y/N]: "
+#     if read -q; then
+#         echo; zplug install
+#     fi
+# fi
+
+# zplug load
+
+# ZINIT =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+ZINIT_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/zinit"
+
+if [[ ! -d $ZINIT_HOME ]]; then
+  mkdir -p $ZINIT_HOME
+  git clone https://github.com/zdharma-continuum/zinit $ZINIT_HOME
+fi
+
+source $ZINIT_HOME/zinit.zsh
+
+# prompt
+zinit ice depth=1; zinit light romkatv/powerlevel10k
+# syntax highlight
+zinit light zsh-users/zsh-syntax-highlighting
+# fzf
+zinit light Aloxaf/fzf-tab
+# autocomplete
+zinit light zsh-users/zsh-completions
+autoload -U compinit && compinit
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+zstyle ':completion:*' menu no
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+# autoSuggestions
+zinit light zsh-users/zsh-autosuggestions
 
 # Enable colors and change prompt:
 autoload -U colors && colors
 
 # History in cache directory:
-HISTSIZE=10000
-SAVEHIST=10000
 mkdir -p ~/.cache/zsh
 touch ~/.cache/zsh/history
 HISTFILE=~/.cache/zsh/history
+HISTSIZE=10000
+SAVEHIST=10000
+HISTDUP=erase
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
 
 # Basic auto/tab complete:
-autoload -U compinit
-zstyle ':completion:*' menu select
-zmodload zsh/complist
-compinit
-_comp_options+=(globdots)		# Include hidden files.
+# autoload -U compinit
+# zstyle ':completion:*' menu select
+# zmodload zsh/complist
+# compinit
+# _comp_options+=(globdots)		# Include hidden files.
 
 # vi mode
 # bindkey -v
 # export KEYTIMEOUT=1
 
 # Use vim keys in tab complete menu:
-bindkey -M menuselect 'h' vi-backward-char
-bindkey -M menuselect 'k' vi-up-line-or-history
-bindkey -M menuselect 'l' vi-forward-char
-bindkey -M menuselect 'j' vi-down-line-or-history
+# bindkey -M menuselect 'h' vi-backward-char
+# bindkey -M menuselect 'k' vi-up-line-or-history
+# bindkey -M menuselect 'l' vi-forward-char
+# bindkey -M menuselect 'j' vi-down-line-or-history
 # bindkey -v '^?' backward-delete-char
 
 # Change cursor shape for different vi modes.
@@ -103,6 +143,8 @@ alias dotcommit='/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME c
 alias dotpush='/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME push'
 alias lazydotfiles='lazygit --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME'
 
+alias dfiles='/usr/bin/git --git-dir=$HOME/dddot --work-tree=$HOME'
+
 # systemctl
 alias ctl='sudo systemctl'
 alias ctlstatus='sudo systemctl status'
@@ -131,8 +173,8 @@ alias start-library='cd /home/eduardo/alma/web-volume-viewer && nvm use 14.21.3 
 alias start-library-live='cd /home/eduardo/alma/web-volume-viewer && nvm use 14.21.3 && yarn dev-live'
 # alias start-viewer-local='cd /home/eduardo/alma/web-viewer && yarn start-local & kitty -d /home/eduardo/alma/backend-visor-node yarn start '
 # dir size
-alias dirsize='du -h -d 1'
-alias sudodirsize='sudo du -h -d 1'
+alias dirsize='du -h -d 1 | sort -h'
+alias sudodirsize='sudo du -h -d 1 | sort -h'
 
 #pretty cat
 alias ccat='/bin/cat'
@@ -164,8 +206,9 @@ alias df='df -h'                          # human-readable sizes
 alias free='free -m'                      # show sizes in MB
 
 # tmux
-alias t='tmux attach || tmux new'
-alias tt='tmux new'
+# alias t='tmux attach || tmux new'
+# alias tt='tmux new'
+
 
 ###################################extract############################################
 # # ex - archive extractor
@@ -192,4 +235,14 @@ ex ()
   fi
 }
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+eval "$(fzf --zsh)"
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
+[[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+umask 077

@@ -4,7 +4,7 @@ local _M = {
   -- terminal = "xterm",
   -- terminal = "xfce4-terminal",
   -- terminal = "alacritty",
-  terminal = "kitty",
+  terminal = "wezterm",
 
   -- Default modkey.
   -- Usually, Mod4 is the key with a logo between Control and Alt.

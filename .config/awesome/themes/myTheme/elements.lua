@@ -6,8 +6,8 @@ local dpi = xresources.apply_dpi
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
-theme.font = "xft:Monaco 8" -- "Tamsyn 10" -- "Sans 8"
-theme.taglist_font = "xft:Monaco 8"
+theme.font = "xft:Monaco 10" -- "Tamsyn 10" -- "Sans 8"
+theme.taglist_font = "xft:Monaco 10"
 theme.menu_font = "xft:Monaco"
 
 theme.bg_normal = gmc.color['black'] .. "cc"
@@ -17,7 +17,7 @@ theme.bg_minimize = gmc.color['grey500'] .. "cc"
 
 -- theme.bg_systray = gmc.color['grey800']
 theme.bg_systray = gmc.color['black'] .. "01"
-theme.systray_icon_spacing = dpi(2)
+theme.systray_icon_spacing = dpi(3)
 
 theme.fg_normal = gmc.color['white']
 theme.fg_focus = gmc.color['white']
