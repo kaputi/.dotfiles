@@ -1,0 +1,33 @@
+#!/bin/bash
+
+#get src and dest from args
+SRC=$1
+DST=$2
+
+separator() {
+  terminal_width=$(tput cols)
+  fill_line=$(printf '=%.0s' $(seq 1 $terminal_width))
+  echo "$fill_line"
+}
+
+if [ -z "$SRC" ] || [ -z "$DST" ]; then
+  echo "Source and destination are required"
+  echo "Usage: exactcp <src> <dst>"
+  exit 1
+fi
+
+separator
+echo "Copying $SRC to $DST"
+echo "rsync -rapogth --info=progress2 \"$SRC\" \"$DST\""
+separator
+
+# r = recursive
+# a = archive
+# p = preserve permissions
+# o = preserve owner
+# g = preserve group
+# t = preserve time
+# h = human-readable
+
+# rsync -rapogth --progress --stats "$SRC" "$DST"
+rsync -rapogth --info=progress2 "$SRC" "$DST"
