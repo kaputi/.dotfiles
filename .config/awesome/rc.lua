@@ -1,11 +1,11 @@
 -- If LuaRocks is installed, make sure that packages installed through it are
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
-pcall(require, "luarocks.loader")
+pcall(require, 'luarocks.loader')
 
 -- Standard awesome library
 -- local gears = require("gears")
-local awful = require("awful")
-require("awful.autofocus")
+local awful = require('awful')
+require('awful.autofocus')
 -- Theme handling library
 -- local beautiful = require("beautiful")
 
@@ -16,7 +16,7 @@ RC = {} -- global namespace, on top before require any modules
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
-RC.vars = require("main.user-variables")
+RC.vars = require('main.user-variables')
 
 modkey = RC.vars.modkey
 
@@ -26,24 +26,24 @@ modkey = RC.vars.modkey
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 --  Themes
-require("main.theme")
+require('main.theme')
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 -- Custom Local Library
 local main = {
-  layouts = require("main.layouts"),
-  tags = require("main.tags"),
+  layouts = require('main.layouts'),
+  tags = require('main.tags'),
   -- menu = require("main.menu"),
-  rules = require("main.rules")
+  rules = require('main.rules'),
 }
 
 -- Custom Local Library: Keys and Mouse Binding
 local binding = {
-  globalbuttons = require("binding.globalbuttons"),
-  clientbuttons = require("binding.clientbuttons"),
-  globalkeys = require("binding.globalkeys"),
-  bindtotags = require("binding.bindtotags"),
-  clientkeys = require("binding.clientkeys")
+  globalbuttons = require('binding.globalbuttons'),
+  clientbuttons = require('binding.clientbuttons'),
+  globalkeys = require('binding.globalkeys'),
+  bindtotags = require('binding.bindtotags'),
+  clientkeys = require('binding.clientkeys'),
 }
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -85,7 +85,7 @@ root.buttons(binding.globalbuttons())
 root.keys(RC.globalkeys)
 
 --  Statusbar: Wibar
-require("deco.statusbar")
+require('deco.statusbar')
 
 --  Rules
 -- Rules to apply to new clients (through the "manage" signal).
@@ -93,24 +93,28 @@ awful.rules.rules = main.rules(binding.clientkeys(), binding.clientbuttons())
 --
 
 -- Signals
-require("main.signals")
+require('main.signals')
 --
 
 -- autolaunch
--- awful.spawn.with_shell("picom -b")
 -- awful.spawn.with_shell(
 --     "nitrogen --set-zoom-fill --random ~/Pictures/WallpapersDev/")
-awful.spawn.with_shell("/home/eduardo/.screenlayout/MyScreenLayout.sh")
-awful.spawn.with_shell("nitrogen --set-zoom-fill --restore")
-awful.spawn.with_shell("dunst")
-awful.spawn.with_shell("traylaunch.sh")
+awful.spawn.with_shell('/home/eduardo/.screenlayout/MyScreenLayout.sh')
+awful.spawn.with_shell('nitrogen --set-zoom-fill --restore')
+-- awful.spawn.with_shell("dunst")
+awful.spawn.with_shell('traylaunch.sh')
 -- awful.spawn.with_shell("xbindkeys")
 -- awful.spawn.with_shell("batteryAlert.sh")
 -- awful.spawn.with_shell("emacs --daemon")
 awful.spawn.with_shell(
-    "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1")
-awful.spawn.with_shell("capsEscape")
-awful.spawn.with_shell("birdtray")
+  '/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1'
+)
+-- awful.spawn.with_shell("capsEscape")
+awful.spawn.with_shell('birdtray')
+
+awful.spawn.with_shell('picom -b')
+
+awful.spawn.with_shell('/home/eduardo/.local/bin/restartNotification.sh')
 
 -- beautiful.useless_gap = 5
 

@@ -70,3 +70,8 @@ export XDG_CURRENT_DESKTOP=GNOME
 # flutter
 export CHROME_EXECUTABLE=google-chrome-stable
 export PATH=$PATH:$HOME/development/flutter/bin
+
+#deno
+export DENO_INSTALL="$HOME/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
+

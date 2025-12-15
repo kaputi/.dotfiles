@@ -4,6 +4,8 @@ minutes=60
 delay=$(($minutes * 60))
 echo $delay
 
-dunstctl set-paused true
+# dunstctl set-paused true
+killall deadd-notification-center
 sleep $delay
-dunstctl set-paused false
+deadd-notification-center
+# dunstctl set-paused false

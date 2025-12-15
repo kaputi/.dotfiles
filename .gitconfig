@@ -11,3 +11,7 @@
   helper = cache
 [safe]
 	directory = /home/eduardo/code/cortezaWP
+[init]
+	defaultBranch = main
+[pull]
+	rebase = false

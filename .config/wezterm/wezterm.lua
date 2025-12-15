@@ -11,8 +11,8 @@ config.term = 'xterm-256color'
 
 -- gui
 config.color_scheme = 'Dracula'
-config.window_background_image =
-  '/home/eduardo/Pictures/WallpapersDev/weylandYutani.jpg'
+-- config.window_background_image =
+--   '/home/eduardo/Pictures/WallpapersDev/weylandYutani.jpg'
 config.inactive_pane_hsb = {
   saturation = 0.9,
   brightness = 0.35,
@@ -26,7 +26,15 @@ config.window_padding = {
   bottom = 0,
 }
 -- font
-config.font = wezterm.font('JetBrainsMono NFM')
+config.font = wezterm.font_with_fallback({
+  'FiraCode Nerd Font',
+  'JetBrainsMono NFM',
+  -- 'JetBrainsMono NFM',
+  -- 'FiraCode Nerd Font',
+  'Symbols Nerd Font',
+  'Symbols Nerd Font Mono',
+  'Noto Color Emoji',
+})
 -- config.font_size = 11.8
 config.font_size = 13.5
 config.font_rules = {
@@ -123,6 +131,11 @@ config.keys = {
   { key = 'c', mods = 'LEADER', action = act.SpawnTab('CurrentPaneDomain') },
   { key = 'p', mods = 'LEADER', action = act.ActivateTabRelative(-1) },
   { key = 'n', mods = 'LEADER', action = act.ActivateTabRelative(1) },
+  {
+    key = 'Q',
+    mods = 'CMD',
+    action = wezterm.action.CloseCurrentTab({ confirm = true }),
+  },
   --panes
   {
     key = 's',
@@ -135,6 +148,11 @@ config.keys = {
     action = act.SplitHorizontal({ domain = 'CurrentPaneDomain' }),
   },
   { key = 'm', mods = 'LEADER', action = act.TogglePaneZoomState },
+  {
+    key = 'q',
+    mods = 'CMD',
+    action = wezterm.action.CloseCurrentPane({ confirm = true }),
+  },
   -- move/resize
   split_nav('move', 'h'),
   split_nav('move', 'j'),
@@ -193,6 +211,11 @@ config.keys = {
   },
 
   { key = 'l', mods = 'LEADER', action = wezterm.action.ShowDebugOverlay },
+
+  -- multiline enter (claude code)
+  { key = 'Enter', mods = 'SHIFT', action = wezterm.action({
+    SendString = '\x1b\r',
+  }) },
 
   -- TODO:
   -- bind S choose-tree
@@ -265,5 +288,14 @@ config.colors = {
     '#ECEFF4',
   },
 }
+
+-- wezterm.on('gui-startup', function(window, pane)
+--   window:toast_notification(
+--     'My Title',
+--     'This notification has a 🎉emoji!',
+--     nil,
+--     5000
+--   )
+-- end)
 
 return config

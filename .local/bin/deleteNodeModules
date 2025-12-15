@@ -12,5 +12,4 @@ then
 
   echo  "bye bye node_modules...."
   find . -name node_modules -type d -prune -exec /home/eduardo/.local/bin/saferm.sh -r {} +
-
 fi

@@ -3,13 +3,13 @@ local wezterm = require('wezterm')
 local tabline =
   wezterm.plugin.require('https://github.com/michaelbrusegard/tabline.wez')
 
-local spotify = require('plugins.mySpotifyPlugin')
+-- local spotify = require('plugins.mySpotifyPlugin')
 
 local M = {}
 
 -- spotify configs
 local spotifyGreen = '#2fb170'
-spotify.setup(50, 5)
+-- spotify.setup(100, 5)
 
 M.setup = function(config)
   tabline.setup({
@@ -38,7 +38,7 @@ M.setup = function(config)
       },
       tabline_x = {
         { Foreground = { Color = spotifyGreen } },
-        spotify.get_currently_playing,
+        -- spotify.get_currently_playing,
       },
       tabline_y = { { 'ram', throttle = 5 }, { 'cpu', throttle = 5 } },
       tabline_z = { 'domain' },

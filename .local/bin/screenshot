@@ -1,3 +1,26 @@
 #!/bin/sh
-mkdir -p
-scrot -s -i $HOME'/Pictures/screenshots/%d-%m-%Y_%H-%M-%S.png'
+
+# # create the directory if it doesn't exist
+# mkdir -p $HOME'/Pictures/screenshots'
+
+# # screenshot name format
+# DATE_FORMAT="%d-%m-%Y_%H-%M-%S"
+
+# # set the file name
+# FILE_NAME=$(date +"$DATE_FORMAT").png
+
+# # set the file path
+# FILE_PATH=$HOME'/Pictures/screenshots/'$FILE_NAME
+
+# # take the screenshot, save to file, and copy to clipboard
+# scrot -s -i $FILE_PATH -e "xclip -selection clipboard -t image/png -i $FILE_PATH"
+
+# # print the file path
+# echo $FILE_PATH
+
+if ! which flameshot; then
+  echo "flameshot not found"
+  exit 1
+fi
+
+flameshot gui

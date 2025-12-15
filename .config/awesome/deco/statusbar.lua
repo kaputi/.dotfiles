@@ -18,7 +18,7 @@ local deco = {
 local taglist_buttons = deco.taglist()
 local tasklist_buttons = deco.tasklist()
 
-local cpu_widget = require('awesome-wm-widgets.cpu-widget.cpu-widget')
+-- local cpu_widget = require('awesome-wm-widgets.cpu-widget.cpu-widget')
 
 local _M = {}
 
@@ -54,12 +54,12 @@ awful.screen.connect_for_each_screen(function(s)
   ))
 
   -- Create cpu widget
-  local mycpu = cpu_widget({
-    width = 120,
-    step_width = 8,
-    step_spacing = 2,
-    color = '#ffffff',
-  })
+  -- local mycpu = cpu_widget({
+  --   width = 120,
+  --   step_width = 8,
+  --   step_spacing = 2,
+  --   color = '#ffffff',
+  -- })
 
   -- Create a taglist widget
   s.mytaglist = awful.widget.taglist({
@@ -77,53 +77,53 @@ awful.screen.connect_for_each_screen(function(s)
 
   -- df -h --output=avail /dev/nvme0n1p5 -- HOME
   -- df -h --output=avail /dev/nvme0n1p4 -- SYS
-  local homedir = awful.widget.watch(
-    'df -h --output=avail /home',
-    30,
-    function(widget, stdout)
-      for line in stdout:gmatch('[^\r\n]+') do
-        if line ~= 'Avail' then
-          widget:set_text('HOME:' .. line)
-        end
-      end
-    end
-  )
+  -- local homedir = awful.widget.watch(
+  --   'df -h --output=avail /home',
+  --   30,
+  --   function(widget, stdout)
+  --     for line in stdout:gmatch('[^\r\n]+') do
+  --       if line ~= 'Avail' then
+  --         widget:set_text('HOME:' .. line)
+  --       end
+  --     end
+  --   end
+  -- )
 
-  local storageDir = awful.widget.watch(
-    'df -h --output=avail /home/storage',
-    30,
-    function(widget, stdout)
-      for line in stdout:gmatch('[^\r\n]+') do
-        if line ~= 'Avail' then
-          widget:set_text('STORAGE:' .. line)
-        end
-      end
-    end
-  )
+  -- local storageDir = awful.widget.watch(
+  --   'df -h --output=avail /home/storage',
+  --   30,
+  --   function(widget, stdout)
+  --     for line in stdout:gmatch('[^\r\n]+') do
+  --       if line ~= 'Avail' then
+  --         widget:set_text('STORAGE:' .. line)
+  --       end
+  --     end
+  --   end
+  -- )
 
-  local storageDir1 = awful.widget.watch(
-    'df -h --output=avail /home/storage4GB',
-    30,
-    function(widget, stdout)
-      for line in stdout:gmatch('[^\r\n]+') do
-        if line ~= 'Avail' then
-          widget:set_text('STORAGE_1:' .. line)
-        end
-      end
-    end
-  )
+  -- local storageDir1 = awful.widget.watch(
+  --   'df -h --output=avail /home/storage4GB',
+  --   30,
+  --   function(widget, stdout)
+  --     for line in stdout:gmatch('[^\r\n]+') do
+  --       if line ~= 'Avail' then
+  --         widget:set_text('STORAGE_1:' .. line)
+  --       end
+  --     end
+  --   end
+  -- )
 
-  local sysdir = awful.widget.watch(
-    'df -h --output=avail /',
-    30,
-    function(widget, stdout)
-      for line in stdout:gmatch('[^\r\n]+') do
-        if line ~= 'Avail' then
-          widget:set_text('FS:' .. line)
-        end
-      end
-    end
-  )
+  -- local sysdir = awful.widget.watch(
+  --   'df -h --output=avail /',
+  --   30,
+  --   function(widget, stdout)
+  --     for line in stdout:gmatch('[^\r\n]+') do
+  --       if line ~= 'Avail' then
+  --         widget:set_text('FS:' .. line)
+  --       end
+  --     end
+  --   end
+  -- )
   -- Create the wibox
   -- s.mywibox = awful.wibar({position = "bottom", screen = s})
   s.mywibox = awful.wibar({ position = 'top', screen = s })
@@ -143,16 +143,16 @@ awful.screen.connect_for_each_screen(function(s)
       -- mykeyboardlayout,
       -- mymem,
       -- wibox.widget.textbox(" | "),
-      wibox.widget.textbox(' | '),
-      sysdir,
-      wibox.widget.textbox(' | '),
-      homedir,
-      wibox.widget.textbox(' | '),
-      storageDir,
-      wibox.widget.textbox(' | '),
-      storageDir1,
-      wibox.widget.textbox(' | '),
-      mycpu,
+      -- wibox.widget.textbox(' | '),
+      -- sysdir,
+      -- wibox.widget.textbox(' | '),
+      -- homedir,
+      -- wibox.widget.textbox(' | '),
+      -- storageDir,
+      -- wibox.widget.textbox(' | '),
+      -- storageDir1,
+      -- wibox.widget.textbox(' | '),
+      -- mycpu,
       wibox.widget.textbox(' | '),
       mytextclock,
       wibox.widget.textbox(' '),

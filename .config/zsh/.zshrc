@@ -1,3 +1,5 @@
+# Add deno completions to search path
+if [[ ":$FPATH:" != *":/home/eduardo/.config/zsh/completions:"* ]]; then export FPATH="/home/eduardo/.config/zsh/completions:$FPATH"; fi
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -176,6 +178,9 @@ alias start-library-live='cd /home/eduardo/alma/web-volume-viewer && nvm use 14.
 alias dirsize='du -h -d 1 | sort -h'
 alias sudodirsize='sudo du -h -d 1 | sort -h'
 
+alias run-station='cd /home/eduardo/code/cmr/estacion/ && yarn start'
+# alias run-station='cd /home/eduardo/code/electron/project-init/ && yarn start'
+
 #pretty cat
 alias ccat='/bin/cat'
 alias cat='bat'
@@ -204,6 +209,8 @@ alias rrm="/bin/rm -i"                          # confirm before removing
 alias rm="saferm.sh"                          # confirm before removing
 alias df='df -h'                          # human-readable sizes
 alias free='free -m'                      # show sizes in MB
+
+alias wincmr='sudo mount -t cifs //192.168.1.89/Users/edu_l/Documents/CMR /home/eduardo/winCMR -o rw,user=edu_l,uid=1000,gid=1000'
 
 # tmux
 # alias t='tmux attach || tmux new'
@@ -245,4 +252,6 @@ eval "$(fzf --zsh)"
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
-umask 077
+umask 022
+
+[ -f "/home/eduardo/.ghcup/env" ] && . "/home/eduardo/.ghcup/env" # ghcup-env
